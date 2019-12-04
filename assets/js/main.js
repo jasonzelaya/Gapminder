@@ -64,6 +64,65 @@ var yAxis = chart.append("g")
     .call(leftAxis);
 
 
+// Update function
+function update(data){
+
+  // Domains do not rely on data
+
+  // Transition
+  var t = d3.transition().duration(100);
+
+  // Current dropdown selection/value
+  var regionSelect = $("#region-select").val();
+
+  // Filter value displayed based on dropdown selection
+  var filteredData = data.filter(function(d){
+    if (regionSelect === "All") {
+      return true;
+    }else{
+      return d.region === regionSelect;
+    }
+  })
+
+
+  // Update pattern
+  // Data join
+  var circles = chart.selectAll("circle")
+      // Bind data and track by country rather than by index
+      .data(filteredData, function(d){
+        return d.country
+      });
+
+
+  // Remove previous elements that are not in the updated data
+  circles.exit().remove()
+
+  // Enter new elements for virtual elements
+  circles.enter()
+    // Append a circle for every virtual element
+    .append("circle")
+    .attr("fill", d => colorScale(d.region))
+    .attr("stroke", "black")
+    // Show tooltip when mouse on bubble
+    // .on("mouseover", tip.show)
+    // Hide tooltip when mouse not on bubble
+    // .on("mouseout", tip.hide)
+    // Update existing elements in DOM and construct new elements
+    .merge(circles)
+    // Transition circles to starting position when page loads or reloads
+    .transition(t)
+      .attr("cx", d => xLogScale(d.income))
+      .attr("cy", d => yLinearScale(d.life_expectancy))
+      .attr("r", d => bubbleScale(d.population))
+
+  // Axes do not rely on data
+
+}
+
+
+
+
+
 
 
 
@@ -86,6 +145,9 @@ d3.csv("assets/data/all_data_cleaned.csv").then(function(data){
   // console.log(d3.extent(data, d => d.income))  // 247, 178,000
   // console.log(d3.extent(data, d => d.life_expectancy))  // 1, 84.2
   // console.log(d3.extent(data, d => d.population))  // 2130, 1,420,000,000
+
+
+  // update()
 
   // Handle errors
 }).catch(function(error){
