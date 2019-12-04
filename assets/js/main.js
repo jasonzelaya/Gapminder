@@ -43,7 +43,25 @@ var colorScale = d3.scaleOrdinal()
     .range(["#00d5e9", "#7feb00", "#ff5872", "#ffe700"])
 
 
+// Axes
+// Axis generators
+var bottomAxis = d3.axisBottom(xLogScale)
+    .tickValues([500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000])
+    .tickFormat(d3.format(""));
 
+var leftAxis = d3.axisLeft(yLinearScale);
+
+// Create x-axis
+var xAxis = chart.append("g")
+    .classed("x bubble axis", true)
+    // Shift x-axis to bottom of chart
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
+
+// Create y-axis
+var yAxis = chart.append("g")
+    .classed("y bubble axis", true)
+    .call(leftAxis);
 
 
 
