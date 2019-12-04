@@ -124,6 +124,21 @@ var incomeLabel = chart.append("text")
     .text("per person (GDP/capita, PPP$ inflation-adjusted)")
 
 
+// Legend
+var legend = chart.append("g")
+  .classed("ordinal bubble legend", true)
+  .attr("transform", `translate(${width - 70}, ${height - 85})`)
+
+var legendOrdinal = d3.legendColor()
+  .shape("path", d3.symbol().type(d3.symbolSquare).size(75)())
+  .shapePadding(1)
+  .scale(colorScale);
+
+var bubbleLegend = chart.select(".ordinal.bubble.legend")
+  .classed("bubbles legend", true) // plural "bubbleS"
+  .attr("font-size", 14)
+  .call(legendOrdinal);
+
 
 // Update function
 function update(data){
