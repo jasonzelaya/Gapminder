@@ -1,7 +1,7 @@
 // Chart dimensions
 var margin = {left: 100, right: 20, top: 20, bottom: 100},
-    width = 800 - margin.left - margin.right, // 680
-    height = 600 - margin.top - margin.bottom; // 480
+    width = 750 - margin.left - margin.right, // 630
+    height = 550 - margin.top - margin.bottom; // 430
 
 // Canvas
 var svg = d3.select("#canvas")
@@ -84,6 +84,29 @@ var yAxis = chart.append("g")
     .call(leftAxis);
 
 
+// Gridlines on chart
+var gridlinesBottom = d3.axisBottom(xLogScale)
+  .tickFormat("")
+  .tickValues([500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000])
+  .tickSize(-height);
+
+var gridlinesLeft = d3.axisLeft(yLinearScale)
+  .tickFormat("")
+  .tickSize(-width);
+
+// Create gridlines
+var xGridlines = chart.append("g")
+  .attr("class", "x bubble gridline")
+  .attr("opacity", 0.5)
+  .attr("transform", `translate(0, ${height})`)
+  .call(gridlinesBottom);
+
+var yGridLines = chart.append("g")
+  .attr("class", "y bubble gridline")
+  .attr("opacity", 0.5)
+  .call(gridlinesLeft)
+
+
 // Labels
 var xAxisLabel = chart.append("text")
     .classed("x label", true)
@@ -117,7 +140,7 @@ var timeLabel = chart.append("text")
 var incomeLabel = chart.append("text")
     .classed("income label", true)
     .attr("text-anchor", "right")
-    .attr("x", width / 2 + 63)
+    .attr("x", width / 1.5 - 6)
     .attr("y", height - 3)
     .attr("font-size", 10)
     .attr("opacity", 0.5)
@@ -126,7 +149,7 @@ var incomeLabel = chart.append("text")
 
 // Legend
 var legend = chart.append("g")
-  .classed("ordinal bubble legend", true)
+  .classed("ordinal legend", true)
   .attr("transform", `translate(${width - 70}, ${height - 85})`)
 
 var legendOrdinal = d3.legendColor()
@@ -134,8 +157,8 @@ var legendOrdinal = d3.legendColor()
   .shapePadding(1)
   .scale(colorScale);
 
-var bubbleLegend = chart.select(".ordinal.bubble.legend")
-  .classed("bubbles legend", true) // plural "bubbleS"
+var bubbleLegend = chart.select(".ordinal.legend")
+  .classed("bubbles legend", true)
   .attr("font-size", 14)
   .call(legendOrdinal);
 

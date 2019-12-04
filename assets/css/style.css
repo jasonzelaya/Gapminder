@@ -1,3 +1,21 @@
 label {
   margin-left: 1.25rem;
 }
+
+#canvas {
+  margin-left: 9.375rem;
+}
+
+#region-select {
+  width: 12.500rem;
+  margin-left: 5.938rem;
+}
+
+#slider-div {
+  margin-left: 15.125rem;
+}
+
+#play-btn {
+  width: 4.000rem;
+  margin-left: 14.375rem;
+}
