@@ -17,6 +17,26 @@ var chart = svg.append("g")
     .attr("height", height);
 
 
+// Tooltip
+var tip = d3.tip().attr('class', 'd3-tip')
+    .html(function(d) {
+        var text = "<strong>Country:</strong> <span style='color:red'>" + d.country + "</span><br>";
+        text += "<strong>Region:</strong> <span style='color:red;text-transform:capitalize'>" + d.region + "</span><br>";
+        text += "<strong>Life Expectancy:</strong> <span style='color:red'>" + d3.format(".2f")(d.life_expectancy) + "</span><br>";
+        text += "<strong>Income:</strong> <span style='color:red'>" + d3.format("$,.0f")(d.income) + "</span><br>";
+        text += "<strong>Population:</strong> <span style='color:red'>" + d3.format(",.0f")(d.population) + "</span><br>";
+        return text;
+    });
+chart.call(tip);
+
+
+// Timer
+var time = 0;
+var selected;
+// Interval function
+var interval;
+
+
 // Scales
 // Income
 var xLogScale = d3.scaleLog()
@@ -144,9 +164,9 @@ function update(data){
     .attr("fill", d => colorScale(d.region))
     .attr("stroke", "black")
     // Show tooltip when mouse on bubble
-    // .on("mouseover", tip.show)
+    .on("mouseover", tip.show)
     // Hide tooltip when mouse not on bubble
-    // .on("mouseout", tip.hide)
+    .on("mouseout", tip.hide)
     // Update existing elements in DOM and construct new elements
     .merge(circles)
     // Transition circles to starting position when page loads or reloads
@@ -155,16 +175,66 @@ function update(data){
       .attr("cy", d => yLinearScale(d.life_expectancy))
       .attr("r", d => bubbleScale(d.population))
 
-  // Axes do not rely on data
 
+    // Update timeLabel
+    timeLabel.text(+(time + 1800))
+
+    // Slider label and time label always match
+    $("#slider-year-label")[0].innerHTML = +(time + 1800)
+
+    // Slide slider relative to the time value
+    $("#slider").slider("value", +(time + 1800))
+
+  // Axes do not rely on data
 }
 
 
+// Reset timer and update visualization
+function step(){
+  time = (time < restructuredData.length - 1) ? time+1 : 0
 
+  update(restructuredData[time])
+}
 
+// Interactive controls
+$("#play-btn").click(function(){
+  var button = $(this)
+  if (button.text() === "Play"){
+    button.text("Pause")
+    interval = setInterval(step, 100)
+  }else{
+    button.text("Play")
+    clearInterval(interval)
+  }
+});
 
+// Reset timer and update chart
+$("#reset-btn").click(function(){
+  time = 0;
+  update(restructuredData[0])
+});
 
+// Update visualization when dropdown value changes
+$("#region-select").change(function(){
+  update(restructuredData[time])
+});
 
+// jQuery UI slider
+$("#slider").slider({
+  // Max range
+  max: 2018,
+  // Min range
+  min: 1800,
+  // Increments of 1
+  step: 1,
+  // Event handler
+  slide: function(event, ui){
+    // Change the value of the timer to the date the slider was moved to
+    time = ui.value - 1800;
+    // Enable changing the value of the timer when the visualization is paused
+    update(restructuredData[time]);
+  }
+});
 
 
 // Load data
@@ -178,16 +248,25 @@ d3.csv("assets/data/all_data_cleaned.csv").then(function(data){
     d.year = +d.year;
   });
 
-  console.log(data)
+  // Nest data by year
+  var nestedData = d3.nest()
+    .key(d => d.year)
+    .entries(data);
 
+  // Remove the object keys
+  restructuredData = nestedData.map(d => d.values)
+
+    // console.log(data); // Array of objects
+    // console.log(nestedData); // Array of objects grouped by year
+    console.log(restructuredData) // Array of arrays. Nested arrays are comprised of objects
+
+  update(restructuredData[0]);
 
   // Min/max values for scale domains
   // console.log(d3.extent(data, d => d.income))  // 247, 178,000
   // console.log(d3.extent(data, d => d.life_expectancy))  // 1, 84.2
   // console.log(d3.extent(data, d => d.population))  // 2130, 1,420,000,000
 
-
-  // update()
 
   // Handle errors
 }).catch(function(error){
