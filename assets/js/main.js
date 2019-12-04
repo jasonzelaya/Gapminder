@@ -53,20 +53,60 @@ var leftAxis = d3.axisLeft(yLinearScale);
 
 // Create x-axis
 var xAxis = chart.append("g")
-    .classed("x bubble axis", true)
+    .classed("x axis", true)
     // Shift x-axis to bottom of chart
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
 
 // Create y-axis
 var yAxis = chart.append("g")
-    .classed("y bubble axis", true)
+    .classed("y axis", true)
     .call(leftAxis);
+
+
+// Labels
+var xAxisLabel = chart.append("text")
+    .classed("x label", true)
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom / 2)
+    .attr("font-size", margin.top)
+    .text("Income");
+
+ var yAxisLabel = chart.append("text")
+    .classed("y label", true)
+    .attr("text-anchor", "middle")
+    .attr("x", -height / 2)
+    .attr("y", -margin.left / 2)
+    .attr("transform", "rotate(-90)")
+    .attr("font-size", margin.right)
+    .text("Life Expectancy (Years)");
+
+// Year label to update with the slider
+var timeLabel = chart.append("text")
+    .classed("time label", true)
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", height / 1.39)
+    .attr("font-family", "Titillium Web")
+    .attr("font-size", 250)
+    .attr("opacity", 0.2)
+    .text("1800");
+
+// Label in bottom right corner to provide greater detail for the income value
+var incomeLabel = chart.append("text")
+    .classed("income label", true)
+    .attr("text-anchor", "right")
+    .attr("x", width / 2 + 63)
+    .attr("y", height - 3)
+    .attr("font-size", 10)
+    .attr("opacity", 0.5)
+    .text("per person (GDP/capita, PPP$ inflation-adjusted)")
+
 
 
 // Update function
 function update(data){
-
   // Domains do not rely on data
 
   // Transition

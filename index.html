@@ -26,15 +26,29 @@
       <!-- Title -->
       <h4 class="text-center">Gapminder Clone</h4>
       <hr>
-      <!-- Region dropdown list-->
       <div class="row">
-        <select id="region-select" class="col-md-6 form-control">
-          <option selected value="All">All</option>
-          <option value="Africa">Africa</option>
-          <option value="America">America</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-        </select>
+        <div class="col-md-6">
+          <!-- Play button -->
+          <button id="play-btn" class="btn btn-primary">Play</button>
+          <!-- Reset button -->
+          <button id="reset-btn" class="btn btn-primary">Reset</button>
+          <!-- Year slider -->
+          <div id="slider-div">
+              <!-- Year label changes relative to the slider's value -->
+              <label>Year: <span id="year-label">1800</span></label>
+              <div id="slider"></div>
+          </div>
+        </div>
+        <!-- Region dropdown list-->
+        <div class="col-md-6">
+          <select id="region-select" class="col-md-6 form-control">
+            <option selected value="All">All</option>
+            <option value="Africa">Africa</option>
+            <option value="America">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+          </select>
+        </div>
       </div>
       <!-- Visualization -->
       <div class="row">
