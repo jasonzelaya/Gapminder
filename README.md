@@ -3,11 +3,22 @@
 #### --Status: Active
 
 ### Technologies
+* JavaScript
+* ES6
+* D3
+* D3-tip
+* D3-legend
+* jQuery
+* jQuery UI
 * Python
 * Pandas, jupyter
 * Numpy
 * Country converter
 * IPython
+* Tableau
+* Bootstrap 4
+* HTML
+* CSS
 
 #### Data License
 
