@@ -1,6 +1,6 @@
 # Gapminder Clone
 
-#### --Status: Active
+#### --Status: Complete
 
 ### Technologies
 * JavaScript
@@ -19,6 +19,9 @@
 * Bootstrap 4
 * HTML
 * CSS
+
+# Project Link
+ https://jasonzelaya.github.io/Gapminder-Clone/
 
 #### Data License
 
