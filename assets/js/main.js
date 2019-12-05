@@ -114,7 +114,7 @@ var xAxisLabel = chart.append("text")
     .attr("x", width / 2)
     .attr("y", height + margin.bottom / 2)
     .attr("font-size", margin.top)
-    .text("Income");
+    .text("Income (Per Person)");
 
  var yAxisLabel = chart.append("text")
     .classed("y label", true)
