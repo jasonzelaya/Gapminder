@@ -20,7 +20,7 @@
 * HTML
 * CSS
 
-# Project Link
+### Project Link
  https://jasonzelaya.github.io/Gapminder-Clone/
 
 #### Data License
