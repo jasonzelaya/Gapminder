@@ -14,7 +14,6 @@
 * Pandas, jupyter
 * Numpy
 * Country converter
-* IPython
 * Tableau
 * Bootstrap 4
 * HTML
