@@ -4,13 +4,13 @@
 
 ### Technologies
 * JavaScript
+* Python
 * ES6
 * D3
 * D3-tip
 * D3-legend
 * jQuery
 * jQuery UI
-* Python
 * Pandas, jupyter
 * Numpy
 * Country converter
