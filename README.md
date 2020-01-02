@@ -20,7 +20,7 @@
 * CSS
 
 ### Project Link
- https://jasonzelaya.github.io/Gapminder-Clone/
+https://jasonzelaya.github.io/Gapminder/
 
 #### Data License
 
