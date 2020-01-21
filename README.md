@@ -1,6 +1,6 @@
-# Gapminder Clone
+# Gapminder
 
-#### --Status: Complete
+#### -- Project Status: Completed
 
 ### Technologies
 * JavaScript
@@ -12,9 +12,8 @@
 * jQuery
 * jQuery UI
 * Pandas, jupyter
-* Numpy
+* NumPy
 * Country converter
-* Tableau
 * Bootstrap 4
 * HTML
 * CSS
