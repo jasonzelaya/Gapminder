@@ -1,25 +1,25 @@
-# Gapminder
+# Gapminder Clone
 
 #### -- Project Status: Completed
 
 ### Technologies
-* JavaScript
 * Python
+* JavaScript
+* Pandas, jupyter
+* NumPy
+* Country converter
 * ES6
 * D3
 * D3-tip
 * D3-legend
 * jQuery
 * jQuery UI
-* Pandas, jupyter
-* NumPy
-* Country converter
 * Bootstrap 4
 * HTML
 * CSS
 
 ### Project Link
-https://jasonzelaya.github.io/Gapminder/
+https://jasonzelaya.github.io/Gapminder-Clone/
 
 #### Data License
 
