@@ -1,4 +1,4 @@
-# Gapminder Clone
+# Gapminder
 
 #### -- Project Status: Completed
 
